@@ -1,0 +1,55 @@
+---
+.catalog:
+  name: MySQL
+  version: v0
+  description: MySQL with resources contraints
+  uuid: mysql-0
+  minimum_rancher_version: v1.2.0
+  questions:
+    - variable: MYSQL_VERSION
+      label: MySQL version
+      description: The MySQL version to use
+      type: enum
+      options:
+        - "5.5"
+        - "5.6"
+        - "5.7"
+      default: "5.5"
+      required: true
+    - variable: MYSQL_ROOT_PASSWORD
+      label: MySQL root password
+      decription: The password that will be set for the MySQL root superuser account
+      type: password
+      required: true
+    - variable: MYSQL_DATABASE
+      label: MySQL database
+      description: The name of a database to be created on image startup
+      type: string
+      required: true
+    - variable: MYSQL_USER
+      label: MySQL user
+      description: The name of a new user to create
+      type: string
+      required: true
+    - variable: MYSQL_PASSWORD
+      label: MySQL password
+      description: The password of the new user created
+      type: password
+      required: true
+#    - variable: MEM_LIMIT
+#      label: Memory limit
+#      description: Memory limit.
+#      type: int
+#      required: true
+    - variable: MAX_CONNECTIONS
+      label: Max connections
+      description: Maximum number of concurrent connections.
+      type: int
+      default: 151
+      required: true
+    - variable: QUOTA_SIZE_MIB
+      label: Quota for maximum file size
+      type: int
+      default: 500
+      required: true
+
