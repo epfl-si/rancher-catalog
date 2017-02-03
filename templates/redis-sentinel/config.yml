@@ -1,0 +1,7 @@
+---
+name: redis-sentinel
+description: |
+  Redis in HA using Sentinel
+version: v0
+category: Databases
+
