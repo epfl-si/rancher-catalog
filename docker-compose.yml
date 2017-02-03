@@ -10,16 +10,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     #mem_limit: ${MEM_LIMIT}
     command: --max-connections=${MAX_CONNECTIONS}
+    ports: ${MYSQL_EXPORT_PORT}:3306
     volumes:
       - mysqldata:/var/lib/mysql
-
-  lb:
-    image: rancher/lb-service-haproxy:v0.4.9
-    ports: ${MYSQL_EXPORT_PORT}:3306
-    labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
-
 
 volumes:
   mysqldata:

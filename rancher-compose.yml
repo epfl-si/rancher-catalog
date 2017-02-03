@@ -59,20 +59,3 @@
       default: 3306
       required: true
 
-services:
-  lb:
-    lb_config:
-      certs: []
-      port_rules:
-      - priority: 1
-        protocol: tcp
-        service: nfs-server
-        source_port: ${MYSQL_EXPORT_PORT}
-        target_port: 3306
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      interval: 2000
-
