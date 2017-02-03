@@ -1,7 +1,7 @@
 version: '2'
 services:
   nfs-server:
-    image: dabelenda/nfs-server
+    image: epflidevelop/nfs-server
     privileged: true
     pid: host
     volumes:
@@ -13,7 +13,7 @@ services:
 
   lvmnfs-driver:
     privileged: true
-    image: dabelenda/storage-lvmnfs:v0.6.6
+    image: epflidevelop/storage-lvmnfs:v0.6.6
     pid: host
     links:
     - nfs-server
