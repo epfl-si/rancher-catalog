@@ -11,12 +11,20 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: storage=true
 
+  lb:
+    image: rancher/lb-service-haproxy:v0.4.9
+    ports:
+    - 3306:3306/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+
   lvmnfs-driver:
     privileged: true
     image: epflidevelop/storage-lvmnfs:v0.6.6
     pid: host
     links:
-    - nfs-server
+    - lb:nfs-server
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
