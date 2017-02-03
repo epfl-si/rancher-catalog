@@ -1,0 +1,40 @@
+version: '2'
+catalog:
+  name: "Rancher NFS TEST"
+  version: "0.6.6"
+  description: |
+    Docker volume plugin for NFS TEST
+  minimum_rancher_version: "v1.1.999"
+  questions:
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+
+
+services:
+  lb:
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: nfs-server
+        source_port: 3306
+        target_port: 3306
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+
+  lvmnfs-driver:
+    storage_driver:
+      name: rancher-lvmnfs
+      scope: environment
+      volume_access_mode: multiHostRW
