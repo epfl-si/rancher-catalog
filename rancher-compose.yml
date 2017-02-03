@@ -24,8 +24,8 @@ services:
       - priority: 1
         protocol: tcp
         service: nfs-server
-        source_port: 3306
-        target_port: 3306
+        source_port: 2049
+        target_port: 2049
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
