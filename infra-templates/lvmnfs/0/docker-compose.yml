@@ -1,0 +1,33 @@
+version: '2'
+services:
+  nfs-server:
+    image: dabelenda/nfs-server
+    privileged: true
+    pid: host
+    volumes:
+    - /data
+    - /etc/services:/etc/services
+    - /dev:/host/dev
+    labels:
+      io.rancher.scheduler.affinity:host_label: storage=true
+
+  lvmnfs-driver:
+    privileged: true
+    image: dabelenda/storage-lvmnfs:v0.6.6
+    pid: host
+    links:
+    - nfs-server
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+    environment:
+      NFS_SERVER: nfs-server
+      MOUNT_DIR: /
+      MOUNT_OPTS: nfsvers=4
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    volumes:
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
+
