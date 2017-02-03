@@ -1,0 +1,20 @@
+.catalog:
+  name: "Rancher NFS TEST"
+  version: "0.6.6"
+  description: |
+    Docker volume plugin for NFS TEST
+  minimum_rancher_version: "v1.1.999"
+  questions:
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+lvmnfs-driver:
+  storage_driver:
+    name: rancher-lvmnfs
+    scope: environment
+    volume_access_mode: multiHostRW
