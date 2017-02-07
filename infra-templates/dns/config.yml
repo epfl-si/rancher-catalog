@@ -1,0 +1,7 @@
+---
+name: dns
+description: |
+  Rancher external-dns RFC2136 driver with included Bind9 server.
+version: v1.0.0
+category: DNS
+
