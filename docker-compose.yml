@@ -1,0 +1,37 @@
+---
+version: '2'
+services:
+  dns-server:
+    image: digitallumberjack/docker-bind9:v1.2.0
+    labels:
+      io.rancher.scheduler.affinity:host_label: dns=true
+    ports:
+      - ${BIND9_PORT}:53/tcp
+      - ${BIND9_PORT}:53/udp
+    environment:
+      BIND9_ROOTDOMAIN: ${ROOT_DOMAIN}
+      BIND9_KEYNAME: ${TSIG_KEYNAME}
+      BIND9_KEY: ${TSIG_SECRET}
+      BIND9_FORWARDERS: ${BIND9_FORWARDERS}
+      RANCHER_ENV: "true"
+
+  rfc2136dns:
+    image: rancher/external-dns:v0.6.2
+    command: -provider=rfc2136
+    expose:
+     - 1000
+    links:
+      - dns-server:bind9
+    environment:
+      RFC2136_HOST: bind9
+      RFC2136_PORT: 53
+      RFC2136_TSIG_KEYNAME: ${TSIG_KEYNAME}
+      RFC2136_TSIG_SECRET: ${TSIG_SECRET}
+      RFC2136_INSECURE: false
+      ROOT_DOMAIN: ${ROOT_DOMAIN}
+      NAME_TEMPLATE: ${NAME_TEMPLATE}
+      TTL: ${TTL}
+    labels:
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.agent.role: "external-dns"
+   
