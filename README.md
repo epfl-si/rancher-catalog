@@ -20,3 +20,7 @@ The Docker image of the [Driver](https://github.com/epfl-idevelop/rancher-templa
  - Type `make` so that all the rancher-storage driver images are automatically built
  - `docker tag $(docker images -q rancher/storage-lvmnfs) epflidevelop/storage-lvmnfs` will tag the image using the correct name
  - `docker push epflidevelop/storage-lvmnfs` will upload the image to the docker-hub (if the credentials were given using `docker login`)
+
+## Rancher Upgrade Caution
+
+A change on the LB configuration will cause an New Container to be spawne, this new container will have a different IP from the previous one. This change of IP *will break all previous Rancher Storage mounts!* To upgrade the Load-Balancer configuration you need to schedule a complete downtime of all containers using LVMNFS Volumes.
