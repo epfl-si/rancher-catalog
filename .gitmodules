@@ -1,3 +1,0 @@
-[submodule "templates/mysql/0"]
-	path = templates/mysql/0
-	url = https://github.com/epfl-idevelop/rancher-template-mysql.git
