@@ -1,6 +1,0 @@
----
-name: rancher-lvmnfs
-description: |
-  Rancher-Storage Driver that uses LVM backend to create NFS shares with Disk Usage Quota.
-version: 0.6.6
-category: Databases
