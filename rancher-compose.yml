@@ -27,15 +27,15 @@
       description: The name of a database to be created on image startup
       type: string
       required: true
-    - variable: MYSQL_USER
+    - variable: AMM_USERNAME
       label: MySQL user
       description: The name of a new user to create
       type: string
       required: true
-    - variable: MYSQL_PASSWORD
+    - variable: AMM_USER_PASSWORD_HASH
       label: MySQL password
-      description: The password of the new user created
-      type: password
+      description: "The hashed password of the new user created: format is '*' + [HEX]SHA1([BIN]SHA1('string password'))"
+      type: string
       required: true
 #    - variable: MEM_LIMIT
 #      label: Memory limit
