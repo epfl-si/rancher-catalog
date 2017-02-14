@@ -24,3 +24,5 @@ The Docker image of the [Driver](https://github.com/epfl-idevelop/rancher-templa
 ## Rancher Upgrade Caution
 
 A change on the LB configuration will cause an New Container to be spawne, this new container will have a different IP from the previous one. This change of IP *will break all previous Rancher Storage mounts!* To upgrade the Load-Balancer configuration you need to schedule a complete downtime of all containers using LVMNFS Volumes.
+
+(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
