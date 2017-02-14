@@ -9,3 +9,4 @@ This template runs a single MySQL Schema.
 
 The [rancher-storage lvmnfs driver](https://github.com/epfl-idevelop/rancher-template-lvmnfs) must be deployed appropriately on the rancher cluster.
 
+(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
