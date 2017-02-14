@@ -11,3 +11,5 @@ This catalog contains multiple templates:
 
 ## Usage
 To use this catalog, insert the repository's URL in the `ADMIN` -> `Settings` -> `Catalog` section of the Rancher UI.
+
+(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
