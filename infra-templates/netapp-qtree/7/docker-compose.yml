@@ -1,0 +1,27 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+services:
+  netapp-qtree-driver:
+    privileged: true
+    image: epflidevelop/storage-netapp-qtree:v0.6.6
+    pid: host
+    ipc: host
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+      io.rancher.container.pull_image: always
+    environment:
+      MOUNT_OPTS: nfsvers=3
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      NETAPP_VOLUME_NAME: '${NETAPP_VOLUME_NAME}'
+      NETAPP_POLICY_NAME: '${NETAPP_POLICY_NAME}'
+      NETAPP_SVM: '${NETAPP_SVM}'
+      NETAPP_SVM_USERNAME: '${NETAPP_SVM_USERNAME}'
+      NETAPP_SVM_SSHKEY: '${NETAPP_SVM_SSHKEY}'
+      SVM_VOLUME_PATH: '${SVM_VOLUME_PATH}'
+    volumes:
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
