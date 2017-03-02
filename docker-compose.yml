@@ -2,40 +2,24 @@
 ---
 version: '2'
 services:
-  nfs-server:
-    image: epflidevelop/nfs-server
+  netapp-qtree-driver:
     privileged: true
+    image: epflidevelop/storage-netapp-qtree:v0.6.6
     pid: host
-    volumes:
-    - /data
-    - /etc/services:/etc/services
-    - /dev:/host/dev
-    labels:
-      io.rancher.scheduler.affinity:host_label: storage=true
-
-  lb:
-    image: rancher/lb-service-haproxy:v0.4.9
-    labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
-
-  lvmnfs-driver:
-    privileged: true
-    image: epflidevelop/storage-lvmnfs:v0.6.6
-    pid: host
-    links:
-    - lb:nfs-server
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: environment
     environment:
-      NFS_SERVER: nfs-server
-      MOUNT_DIR: /
-      MOUNT_OPTS: nfsvers=4
+      MOUNT_OPTS: nfsvers=3
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      NETAPP_VOLUME_NAME: '${NETAPP_VOLUME_NAME}'
+      NETAPP_POLICY_NAME: '${NETAPP_POLICY_NAME}'
+      NETAPP_SVM: '${NETAPP_SVM}'
+      NETAPP_SVM_USERNAME: '${NETAPP_SVM_USERNAME}'
+      NETAPP_SVM_SSHKEY: '${NETAPP_SVM_SSHKEY}'
+      SVM_VOLUME_PATH: '${SVM_VOLUME_PATH}'
     volumes:
     - /var/run:/var/run
     - /dev:/host/dev
     - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
-
