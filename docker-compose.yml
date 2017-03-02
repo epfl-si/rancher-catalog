@@ -7,7 +7,6 @@ services:
     image: epflidevelop/storage-netapp-qtree:v0.6.6
     pid: host
     ipc: host
-    network: host
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
