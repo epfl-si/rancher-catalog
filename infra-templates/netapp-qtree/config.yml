@@ -1,0 +1,9 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+name: netapp-qtree
+description: |
+  Rancher storage Driver for NetApp Qtree
+version: 0.6.6
+category: Storage
+
+
