@@ -10,6 +10,7 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: environment
+      io.rancher.container.pull_image: always
     environment:
       MOUNT_OPTS: nfsvers=3
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
