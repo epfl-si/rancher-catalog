@@ -29,4 +29,8 @@ services:
       io.rancher.sidekicks: ammextras
 
 volumes:
-  mysqldata: {}
+  mysqldata: 
+    driver: rancher-netapp-qtree
+    driver_opts:
+      size: ${QUOTA_SIZE_MIB}M
+
