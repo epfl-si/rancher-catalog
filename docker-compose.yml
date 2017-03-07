@@ -27,6 +27,8 @@ services:
 
   ldap:
     image: dabelenda/389ds
+    ports:
+      - 389:389
     environment:
       LDAP_ROOT_PASSWORD: ${LDAP_ROOT_PASSWORD}
       LDAP_ROOT_DN: ${LDAP_ROOT_DN}
