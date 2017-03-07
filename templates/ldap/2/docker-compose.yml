@@ -1,0 +1,59 @@
+---
+version: '2'
+
+services:
+  autorep:
+    image: dabelenda/autorep
+    labels:
+      io.rancher.container.pull_image: always
+    environment:
+      LDAP_USE_LDAPS: ${LDAP_USE_LDAPS}
+      LDAP_REPLICATED_BASE_DN: ${LDAP_BASE_DN}
+      LDAP_CA_CERTIFICATE: ${LDAP_CA_CERTIFICATE}
+      LDAP_REPLICATION_DN: ${LDAP_REPLICATION_DN}
+      LDAP_REPLICATION_PASSWORD: ${LDAP_REPLICATION_PASSWORD}
+      LDAP_BIND_DN: ${LDAP_ROOT_DN}
+      LDAP_BIND_PASSWORD: ${LDAP_ROOT_PASSWORD}
+      AUTOREP_CLUSTERING_DRIVER_MODULE: standalone
+      AUTOREP_TARGET_DRIVER_MODULE: 389ds
+      AUTOREP_SOURCE_DRIVER_MODULE: rancher
+      AUTOREP_REPLICATION_GRAPH_DRIVER_MODULE: fullmesh
+      AUTOREP_UPDATE_PERIOD: ${AUTOREP_UPDATE_PERIOD}
+      RANCHER_METADATA_APIVERSION: 2016-07-29
+      RANCHER_AUTOREP_TARGET_SERVICE_NAME: ldap
+      RANCHER_REFERENCE_CONAINTER_MODE: containername
+    links:
+      - ldap
+
+  ldap:
+    image: dabelenda/389ds
+    ports:
+      - 389:389
+    environment:
+      LDAP_ROOT_PASSWORD: ${LDAP_ROOT_PASSWORD}
+      LDAP_ROOT_DN: ${LDAP_ROOT_DN}
+      LDAP_SUFFIX: ${LDAP_BASE_DN}
+      LDAP_DOMAIN_NAME: rancher.internal
+      LDAP_REPLICATION_ENABLE: 'True'
+      LDAP_REPLICATION_DN: ${LDAP_REPLICATION_DN}
+      LDAP_REPLICATION_PASSWORD: ${LDAP_REPLICATION_PASSWORD}
+      LDAP_REPLICA_PURGE_DELAY: 0
+      LDAP_REPLICATION_LOG_KEEP_TIME: 1d
+    volumes:
+      - ldap-data:/etc/dirsrv
+      - ldap-run:/var/run/dirsrv
+      - ldap-lock:/var/lock/dirsrv
+      - ldap-varlib:/var/lib/dirsrv
+    labels:
+      io.rancher.container.hostname_override: "container_name"
+      io.rancher.container.pull_image: always
+
+volumes:
+  ldap-data:
+    per_container: true
+  ldap-run:
+    per_container: true
+  ldap-lock:
+    per_container: true
+  ldap-varlib:
+    per_container: true

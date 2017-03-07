@@ -1,0 +1,48 @@
+---
+version: '2'
+
+catalog:
+  name: 'autorep'
+  version: '1'
+  description: |
+    AutoRep
+  minimum_rancher_version: "v1.1.999"
+  questions:
+    - variable: LDAP_BASE_DN
+      label: Base DN
+      description: Base DN that will be available (and replicated) in ldap
+      default: dc=example,dc=com
+      type: string
+    - variable: LDAP_ROOT_DN
+      label: Root DN
+      description: Root DN (login) of the ldap cluster
+      default: cn=Directory Manager
+      type: string
+    - variable: LDAP_ROOT_PASSWORD
+      label: Root DN
+      description: Root password of the ldap cluster
+      type: password
+    - variable: AUTOREP_UPDATE_PERIOD
+      label: Seconds between update of the replication state
+      type: integer
+      default: 10
+    - variable: LDAP_REPLICATION_DN
+      label: Replication DN
+      description: Auth DN for replication of the cluster
+      type: string
+      default: cn=Replication Manager,cn=config
+    - variable: LDAP_REPLICATION_PASSWORD
+      label: Replication Password
+      description: Auth Password for replication of the cluster
+      type: password
+    - variable: LDAP_USE_LDAPS
+      label: Use LDAPS Connection
+      type: enum
+      options:
+        - "True"
+        - "False"
+      default: "False"
+    - variable: LDAP_CA_CERTIFICATE
+      label: CA Certificate for ldaps validation
+      type: multiline
+      required: false
