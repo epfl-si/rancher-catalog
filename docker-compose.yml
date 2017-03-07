@@ -3,7 +3,7 @@ version: '2'
 
 services:
   autorep:
-    image: my.registry/dabelenda/autorep
+    image: dabelenda/autorep
     labels:
       io.rancher.container.pull_image: always
     environment:
@@ -26,7 +26,7 @@ services:
       - ldap
 
   ldap:
-    image: my.registry/dabelenda/389ds
+    image: dabelenda/389ds
     environment:
       LDAP_ROOT_PASSWORD: ${LDAP_ROOT_PASSWORD}
       LDAP_ROOT_DN: ${LDAP_ROOT_DN}
