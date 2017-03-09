@@ -3,7 +3,7 @@ version: '2'
 
 catalog:
   name: 'autorep'
-  version: '4'
+  version: '5'
   description: |
     AutoRep
   minimum_rancher_version: "v1.1.999"
@@ -19,7 +19,7 @@ catalog:
       default: cn=Directory Manager
       type: string
     - variable: LDAP_ROOT_PASSWORD
-      label: Root DN
+      label: Root Password
       description: Root password of the ldap cluster
       type: password
     - variable: AUTOREP_UPDATE_PERIOD
