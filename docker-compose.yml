@@ -6,6 +6,9 @@ services:
     image: dabelenda/bind
     labels:
       io.rancher.container.pull_image: always
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
     environment:
       BIND_LDAP_SERVER: ldap
       BIND_CONFIG_LDAP: 'True'

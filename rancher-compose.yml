@@ -3,7 +3,7 @@ version: '2'
 
 catalog:
   name: 'bind'
-  version: '1'
+  version: '2'
   description: |
     DNS Bind using LDAP backend
   minimum_rancher_version: "v1.1.999"
