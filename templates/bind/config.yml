@@ -3,6 +3,6 @@
 name: Multi-Master DNS
 description: |
   Catalog for Multi-Master Dynamically updatable DNS Setup
-version: '0'
+version: '1'
 category: DNS
 
