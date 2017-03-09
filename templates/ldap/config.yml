@@ -3,5 +3,5 @@
 name: Replicated LDAP
 description: |
   Catalog for replicated LDAP directory
-version: '4'
+version: '5'
 category: Database
