@@ -1,0 +1,8 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+name: Multi-Master DNS
+description: |
+  Catalog for Multi-Master Dynamically updatable DNS Setup
+version: '0'
+category: DNS
+
