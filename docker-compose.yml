@@ -3,7 +3,7 @@ version: '2'
 
 services:
   bind:
-    image: my.registry/dabelenda/bind
+    image: dabelenda/bind
     labels:
       io.rancher.container.pull_image: always
     environment:
