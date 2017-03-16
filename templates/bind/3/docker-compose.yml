@@ -1,0 +1,19 @@
+---
+version: '2'
+
+services:
+  bind:
+    image: dabelenda/bind
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    environment:
+      BIND_LDAP_SERVER: ldap
+      BIND_CONFIG_LDAP: 'True'
+      BIND_LDAP_BIND_DN: ${LDAP_BIND_DN}
+      BIND_LDAP_BIND_PASSWORD: ${LDAP_BIND_PASSWORD}
+      BIND_LDAP_BASE_DN: ${LDAP_BASE_DN}
+      BIND_LDAP_URI_SCHEME: ldap
+      BIND_KEYS_LIST: ${BIND_KEYS_LIST}
+    external_links:
+      - ${LDAP_SERVICE}:ldap
