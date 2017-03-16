@@ -4,8 +4,6 @@ version: '2'
 services:
   bind:
     image: dabelenda/bind
-    labels:
-      io.rancher.container.pull_image: always
     ports:
       - 53:53/tcp
       - 53:53/udp
