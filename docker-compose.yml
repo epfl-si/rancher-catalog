@@ -4,8 +4,6 @@ version: '2'
 services:
   autorep:
     image: dabelenda/autorep
-    labels:
-      io.rancher.container.pull_image: always
     environment:
       LDAP_USE_LDAPS: ${LDAP_USE_LDAPS}
       LDAP_REPLICATED_BASE_DN: ${LDAP_BASE_DN}
@@ -60,7 +58,6 @@ services:
       - ldap-varlib:/var/lib/dirsrv
     labels:
       io.rancher.container.hostname_override: "container_name"
-      io.rancher.container.pull_image: always
 
 volumes:
   ldap-data:
