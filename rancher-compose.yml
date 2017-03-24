@@ -3,7 +3,7 @@
 version: '2'
 catalog:
   name: "Rancher NetApp Qtree"
-  version: "0.6.6"
+  version: "8"
   description: |
     Docker volume plugin for NetApp Qtree
   minimum_rancher_version: "v1.1.999"
@@ -20,7 +20,7 @@ catalog:
     label: Mount options
     type: string
     description: Options to use for mounting the volume
-    default: nfsvers=3
+    default: nfsvers=4,noatime
   - variable: NETAPP_VOLUME_NAME
     label: NetApp Volume Name
     type: string
