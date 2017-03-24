@@ -3,7 +3,7 @@
 version: '2'
 catalog:
   name: "Rancher NetApp Qtree"
-  version: "9"
+  version: "10"
   description: |
     Docker volume plugin for NetApp Qtree
   minimum_rancher_version: "v1.1.999"

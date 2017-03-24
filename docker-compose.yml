@@ -13,7 +13,7 @@ services:
       io.rancher.container.agent.role: environment
       io.rancher.container.pull_image: always
     environment:
-      MOUNT_OPTS: nfsvers=3
+      MOUNT_OPTS: '${MOUNT_OPTS}'
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
       NETAPP_VOLUME_NAME: '${NETAPP_VOLUME_NAME}'
       NETAPP_POLICY_NAME: '${NETAPP_POLICY_NAME}'
