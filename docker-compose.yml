@@ -21,6 +21,7 @@ services:
       NETAPP_SVM_USERNAME: '${NETAPP_SVM_USERNAME}'
       NETAPP_SVM_SSHKEY: '${NETAPP_SVM_SSHKEY}'
       SVM_VOLUME_PATH: '${SVM_VOLUME_PATH}'
+      VOLUME_DEFAULT_SIZE: ${VOLUME_DEFAULT_SIZE}
     volumes:
     - /var/run:/var/run
     - /dev:/host/dev

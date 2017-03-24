@@ -3,7 +3,7 @@
 version: '2'
 catalog:
   name: "Rancher NetApp Qtree"
-  version: "8"
+  version: "9"
   description: |
     Docker volume plugin for NetApp Qtree
   minimum_rancher_version: "v1.1.999"
@@ -50,6 +50,9 @@ catalog:
     label: NFS volume Path prefix
     type: string
     description: Prefix when mounting the volume via NFS, can be empty
+  - variable: VOLUME_DEFAULT_SIZE
+    label: Default quota size of the volumes if not specified in driver options
+    type: string
 
 services:
   netapp-qtree-driver:
