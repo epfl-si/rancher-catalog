@@ -1,0 +1,62 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+catalog:
+  name: "Rancher NetApp Qtree"
+  version: "9"
+  description: |
+    Docker volume plugin for NetApp Qtree
+  minimum_rancher_version: "v1.1.999"
+  questions:
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+  - variable: MOUNT_OPTS
+    label: Mount options
+    type: string
+    description: Options to use for mounting the volume
+    default: nfsvers=4,noatime
+  - variable: NETAPP_VOLUME_NAME
+    label: NetApp Volume Name
+    type: string
+    description: The volume name in which qtrees will be created
+    required: true
+  - variable: NETAPP_POLICY_NAME
+    label: Policy Name
+    type: string
+    description: The NetApp policy name for size enforcing
+    required: true
+  - variable: NETAPP_SVM
+    label: SVM Hostname
+    type: string
+    description: The hostname/IP to connect to the SVM
+    required: true
+  - variable: NETAPP_SVM_USERNAME
+    type: string
+    label: SVM Username
+    descrption: The username used to connect via SSH
+    required: true
+  - variable: NETAPP_SVM_SSHKEY
+    type: multiline
+    label: SSH Private Key
+    description: The private Key used to connect via SSH to the SVM
+    required: true
+  - variable: SVM_VOLUME_PATH
+    label: NFS volume Path prefix
+    type: string
+    description: Prefix when mounting the volume via NFS, can be empty
+  - variable: VOLUME_DEFAULT_SIZE
+    label: Default quota size of the volumes if not specified in driver options
+    type: string
+
+services:
+  netapp-qtree-driver:
+    storage_driver:
+      name: rancher-netapp-qtree
+      scope: environment
+      volume_access_mode: multiHostRW
