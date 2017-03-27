@@ -1,0 +1,150 @@
+---
+version: '2'
+
+catalog:
+  name: 'autorep'
+  version: '9'
+  description: |
+    AutoRep
+  minimum_rancher_version: "v1.1.999"
+  questions:
+    - variable: LDAP_BASE_DN
+      label: Base DN
+      description: Base DN that will be available (and replicated) in ldap
+      default: dc=example,dc=com
+      type: string
+    - variable: LDAP_ROOT_DN
+      label: Root DN
+      description: Root DN (login) of the ldap cluster
+      default: cn=Directory Manager
+      type: string
+    - variable: LDAP_ROOT_PASSWORD
+      label: Root Password
+      description: Root password of the ldap cluster
+      type: password
+    - variable: AUTOREP_UPDATE_PERIOD
+      label: Seconds between update of the replication state
+      type: integer
+      default: 10
+    - variable: LDAP_REPLICATION_DN
+      label: Replication DN
+      description: Auth DN for replication of the cluster
+      type: string
+      default: cn=Replication Manager,cn=config
+    - variable: LDAP_REPLICATION_PASSWORD
+      label: Replication Password
+      description: Auth Password for replication of the cluster
+      type: password
+    - variable: LDAP_EXTRA_SCHEMA_DEFS
+      label: Schema definition to add to the ldap server
+      type: multiline
+      required: false
+    - variable: LDAP_USE_LDAPS
+      label: Use LDAPS Connection
+      type: enum
+      options:
+        - "True"
+        - "False"
+      default: "False"
+    - variable: LDAP_CA_CERTIFICATE
+      label: CA Certificate for ldaps validation
+      type: multiline
+      required: false
+    - variable: LDAP_PLUGIN_ENABLE_ACCOUNT_POLICY
+      label: Enable Account Policy Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_ATTRIBUTE_UNIQUENESS
+      label: Enable Attribute Uniqueness Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_DISTRIBUTED_NUMBERIC_ASSIGNMENT
+      label: Enable Distributed Numberic Assignment Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_MEMBEROF
+      label: Enable MemberOf Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_PAM_PASS_THROUGH_AUTH
+      label: Enable PAM Pass Through Auth Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_PASS_THROUGH_AUTH
+      label: Enable Pass Through Auth Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_POSIX_WINSYNC_API
+      label: Enable Posix Winsyn API Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_REFERENTIAL_INTEGRITY_POSTOPERATION
+      label: Enable Referential Integrity Post-Operation Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_RETRO_CHANGELOG
+      label: Enable Retro Changelog Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_CONTENT_SYNCHRONIZATION
+      label: Enable Content Synchronization Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_ROOTDN_ACCESS_CONTROL
+      label: Enable RootDN Access Control Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_SPACE_INSENSITIVE_STRING
+      label: Enable Space Insensitive String Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_URI_SYNTAX
+      label: Enable URI Syntax Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
+    - variable: LDAP_PLUGIN_ENABLE_USN
+      label: Enable USN Plugin
+      type: enum
+      default: "False"
+      options:
+        - "True"
+        - "False"
