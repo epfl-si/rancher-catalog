@@ -3,7 +3,7 @@ version: '2'
 
 catalog:
   name: 'autorep'
-  version: '9'
+  version: '10'
   description: |
     AutoRep
   minimum_rancher_version: "v1.1.999"
