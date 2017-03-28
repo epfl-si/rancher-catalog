@@ -60,7 +60,7 @@ node('docker') {
 
       stage("deploy image to local docker-engine") {
         def extra_args = dependencies(true)
-        container = image.run(extra_args + container_run_args)
+        container = image.run() // extra_args + container_run_args)
       }
 
       stage("run acceptance tests") {
