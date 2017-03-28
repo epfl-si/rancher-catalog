@@ -10,7 +10,7 @@ def utils = new ch.epfl.idevelop.utils()
 
 def projectname = 'mysql'
 def templatename = 'mysql'
-def imageprefix = 'dabelenda'
+def image_prefix = 'dabelenda'
 def dependencies(foo) {
   return []
 }
@@ -28,7 +28,7 @@ def container_run_args = []
 def github_cred_id = 'foo'
 def github_organization = 'bar'
 
-//def call(projectname, templatename, imageprefix, dependencies, unittest, buildcoveragexml, acceptancetests, versionmaj, versionmin, custombuild, container_run_args, github_cred_id, github_organization) {
+//def call(projectname, templatename, image_prefix, dependencies, unittest, buildcoveragexml, acceptancetests, versionmaj, versionmin, custombuild, container_run_args, github_cred_id, github_organization) {
 node('docker') {
   try {
     stage "Checkout project git repo"
