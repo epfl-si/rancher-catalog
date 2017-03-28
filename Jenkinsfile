@@ -47,7 +47,7 @@ node('docker') {
     def image = null
     def container = null
     
-    lock "container-${projectname}-" {
+    lock("container-${projectname}-${tag}") {
       stage "build image ${image_prefix}/${projectname}:${tag}" {
         if (custombuild) {
           image = custombuild("${image_prefix}/${projectname}:${tag}")
