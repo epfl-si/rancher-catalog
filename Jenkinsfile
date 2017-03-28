@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 // Load shared library
-@Library('epflidevelop') import static com.camptocamp.utils.*
+@Library('epflidevelop') import static ch.epfl.idevelop.utils.*
 
 dockerBuild {
     checkout scm
