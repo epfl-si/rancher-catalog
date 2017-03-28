@@ -31,10 +31,12 @@ def github_organization = 'bar'
 //def call(projectname, templatename, image_prefix, dependencies, unittest, buildcoveragexml, acceptancetests, versionmaj, versionmin, custombuild, container_run_args, github_cred_id, github_organization) {
 node('docker') {
   try {
-    stage "Checkout project git repo"
-    checkout scm
-    stage "Run unit tests"
-    unittest()
+    stage("Checkout project git repo") {
+      checkout scm
+    }
+    stage("Run unit tests") {
+      unittest()
+    }
     coveragefile = buildcoveragexml()
     if (coveragefile) {
       // TODO publish coverage
@@ -48,7 +50,7 @@ node('docker') {
     def container = null
     
     lock("container-${projectname}-${tag}") {
-      stage "build image ${image_prefix}/${projectname}:${tag}" {
+      stage("build image ${image_prefix}/${projectname}:${tag}") {
         if (custombuild) {
           image = custombuild("${image_prefix}/${projectname}:${tag}")
         } else {
@@ -56,18 +58,19 @@ node('docker') {
         }
       }
 
-      stage "deploy image to local docker-engine" {
+      stage("deploy image to local docker-engine") {
         def extra_args = dependencies(true)
         container = image.run(extra_args + container_run_args)
       }
 
-      stage "run acceptance tests" {
+      stage("run acceptance tests") {
         acceptancetests(container)
         container.stop
       }
 
-      stage "push image with tag ${tag}"
-      image.push(tag)
+      stage("push image with tag ${tag}") {
+        image.push(tag)
+      }
 
       if (tag == 'latest') {
         buildnumber = manager.build.getEnvironment(manager.listener)['BUILD_NUMBER']
@@ -76,15 +79,14 @@ node('docker') {
           sh "git push --tags"
         }
 
-        stage "lock build for template-${projectname}"
-        lock "template-${templatename}" {
-          stage "push docker image with tags" {
+        lock("template-${templatename}") {
+          stage("push docker image with tags") {
             image.push("${versionmaj}")
             image.push("${versionmaj}.${versionmin}")
             image.push("${versionmaj}.${versionmin}.${buildnumber}")
           }
 
-          stage "checkout rancher-template-${templatename}" {
+          stage("checkout rancher-template-${templatename}") {
             multiscm {
               git {
                 remote {
@@ -100,11 +102,11 @@ node('docker') {
             sh "cd template; git pull --rebase origin master"
           }
 
-          stage "modify template for image update" {
+          stage("modify template for image update") {
             // TODO modify template
           }
 
-          stage "push template modifications" {
+          stage("push template modifications") {
             // TODO commit changes to template
             // TODO push git repo
           }
