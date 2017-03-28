@@ -114,6 +114,7 @@ node('docker') {
 
     currentBuild.result = "SUCCESS" 
   } catch (err) {
+    println err
     currentBuild.result = "FAILURE" 
   } finally {
     try {
