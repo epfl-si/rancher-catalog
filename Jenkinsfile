@@ -1,8 +1,9 @@
 #!/usr/bin/groovy
 
 // Load shared library
-@Library('epflidevelop') import ch.epfl.idevelop.template_pipeline as template_pipeline
+@Library('epflidevelop') import ch.epfl.idevelop.template_pipeline
 
+def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
 def test(afterfailover) {
 }
