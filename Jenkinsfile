@@ -8,6 +8,9 @@ def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 def test(afterfailover) {
 }
 
+def successhook() {
+}
+
 def stack_env = [
   'MYSQL_VERSION' : '5.5',
   'MYSQL_ROOT_PASSWORD': 'test',
@@ -31,5 +34,6 @@ template_pipeline.process(
     'https://test-rancher.epfl.ch',
     'test-rancher-ci-cred-jenkins',
     'DB',
-    stack_env
+    stack_env,
+    successhook
 )
