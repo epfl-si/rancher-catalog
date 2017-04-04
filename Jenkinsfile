@@ -6,7 +6,7 @@
 def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
 def tests(stackname) {
-  mysql = docker.image('mysql:5.7').run()
+  mysql = docker.image('mysql:5.7')
   mysql.inside("echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
   mysql.inside("echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
 }
