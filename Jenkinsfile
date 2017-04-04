@@ -5,7 +5,7 @@
 
 def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
-def test(afterfailover) {
+def test() {
 }
 
 def successhook() {
