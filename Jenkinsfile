@@ -5,10 +5,10 @@
 
 def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
-def tests() {
-}
-
-def successhook() {
+def tests(stackname) {
+  mysql = docker.image('mysql:5.7').run()
+  mysql.inside("echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
+  mysql.inside("echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
 }
 
 def stack_env_55 = [
@@ -81,6 +81,7 @@ node('docker') {
     }
     currentBuild.result = "SUCCESS"
   } catch (err) {
+    throw err
     currentBuild.result = "FAILURE"
   } finally {
     template_pipeline.inconditional_post_tests()
