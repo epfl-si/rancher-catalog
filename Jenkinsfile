@@ -5,8 +5,7 @@
 
 def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
-def test() {
-  docker.image('mysql:5.5')
+def tests() {
 }
 
 def successhook() {
@@ -23,21 +22,6 @@ def stack_env_55 = [
   'MYSQL_EXPORT_PORT' : 3300
 ]
 
-template_pipeline.process(
-    'mysql',
-    false,
-    this.&test,
-    'epfl-idevelop',
-    'amm-token',
-    'rancher-catalog',
-    'amm-ci@groupes.epfl.ch',
-    'https://test-rancher.epfl.ch',
-    'test-rancher-ci-cred-jenkins',
-    'DB',
-    stack_env_55,
-    this.&successhook
-)
-
 def stack_env_56 = [
   'MYSQL_VERSION' : '5.6',
   'MYSQL_ROOT_PASSWORD': 'test',
@@ -48,21 +32,6 @@ def stack_env_56 = [
   'QUOTA_SIZE_MIB': '500',
   'MYSQL_EXPORT_PORT' : 3300
 ]
-
-template_pipeline.process(
-    'mysql',
-    false,
-    this.&test,
-    'epfl-idevelop',
-    'amm-token',
-    'rancher-catalog',
-    'amm-ci@groupes.epfl.ch',
-    'https://test-rancher.epfl.ch',
-    'test-rancher-ci-cred-jenkins',
-    'DB',
-    stack_env_56,
-    this.&successhook
-)
 
 def stack_env_57 = [
   'MYSQL_VERSION' : '5.7',
@@ -75,17 +44,45 @@ def stack_env_57 = [
   'MYSQL_EXPORT_PORT' : 3300
 ]
 
-template_pipeline.process(
-    'mysql',
-    false,
-    this.&test,
-    'epfl-idevelop',
-    'amm-token',
-    'rancher-catalog',
-    'amm-ci@groupes.epfl.ch',
-    'https://test-rancher.epfl.ch',
-    'test-rancher-ci-cred-jenkins',
-    'DB',
-    stack_env_57,
-    this.&successhook
-)
+//template_pipeline.process(
+//    'mysql',
+//    false,
+//    this.&test,
+//    'epfl-idevelop',
+//    'amm-token',
+//    'rancher-catalog',
+//    'amm-ci@groupes.epfl.ch',
+//    'https://test-rancher.epfl.ch',
+//    'test-rancher-ci-cred-jenkins',
+//    'DB',
+//    stack_env_57,
+//    this.&successhook
+//)
+
+def rancher_server_url = 'https://test-rancher.epfl.ch'
+def rancher_server_credid = 'test-rancher-ci-cred-jenkins'
+def rancher_environment = 'DB'
+def projectname = 'mysql'
+def isinfratemplate = false
+def jenkins_email = 'amm-ci@groupes.epfl.ch'
+def github_cred_id = 'amm-token'
+def github_organization = 'epfl-idevelop'
+def rancher_catalog_repo = 'rancher-catalog'
+
+node('docker') {
+  try {
+    template_pipeline.preinit()
+    rancher_env_id = template_pipeline.get_environment_id(rancher_server_url, rancher_server_credid, rancher_environment);
+    lock("template-${projectname}-${env.BRANCH_NAME}") {
+      template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_55, this.&tests)
+      template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_56, this.&tests)
+      template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_57, this.&tests)
+      template_pipeline.success_post_tests(projectname, jenkins_email, github_cred_id, github_organization, rancher_catalog_repo, isinfratemplate)
+    }
+    currentBuild.result = "SUCCESS"
+  } catch (err) {
+    currentBuild.result = "FAILURE"
+  } finally {
+    template_pipeline.inconditional_post_tests()
+  }
+}
