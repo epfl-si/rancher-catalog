@@ -25,7 +25,6 @@ def stack_env = [
 template_pipeline.process(
     'mysql',
     false,
-    false,
     this.&test,
     'epfl-idevelop',
     'amm-token',
