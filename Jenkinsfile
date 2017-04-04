@@ -28,8 +28,8 @@ template_pipeline.process(
     'amm-token',
     'rancher-catalog',
     'amm-ci@groupes.epfl.ch',
-    'https://rancher.epfl.ch',
+    'https://test-rancher.epfl.ch',
     'test-rancher-ci-cred-jenkins',
-    'CI',
+    'DB',
     stack_env
 )
