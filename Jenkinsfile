@@ -80,8 +80,8 @@ node('docker') {
     }
     currentBuild.result = "SUCCESS"
   } catch (err) {
-    throw err
     currentBuild.result = "FAILURE"
+    throw err
   } finally {
     template_pipeline.inconditional_post_tests()
   }
