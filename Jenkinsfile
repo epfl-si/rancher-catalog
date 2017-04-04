@@ -35,5 +35,5 @@ template_pipeline.process(
     'test-rancher-ci-cred-jenkins',
     'DB',
     stack_env,
-    successhook
+    this.&successhook
 )
