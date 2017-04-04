@@ -7,8 +7,10 @@ def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
 def tests(stackname) {
   mysql = docker.image('mysql:5.7')
-  mysql.inside("echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
-  mysql.inside("echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test")
+  mysql.inside {
+    sh "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test"
+    sh "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test"
+  }
 }
 
 def stack_env_55 = [
