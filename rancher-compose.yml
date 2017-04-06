@@ -3,7 +3,7 @@
 version: '2'
 catalog:
   name: "amm API"
-  version: "0.2.0"
+  version: "0.2.1"
   uuid: 1
   description: |
     REST API for amm 
@@ -80,6 +80,26 @@ catalog:
 
   - variable: AMM_ENVIRONMENT
     label: Rancher environment to use in the Rancher API
+    type: string
+    required: true
+
+  - variable: RANCHER_API_URL
+    label: Rancher API URL to use
+    type: string
+    required: true
+
+  - variable: RANCHER_VERIFY_CERTIFICATE
+    label: Do we check the Rancher Certificate
+    type: boolean
+    required: true
+
+  - variable: RANCHER_ACCESS_KEY
+    label: Rancher Access Key to use
+    type: string
+    required: true
+
+  - variable: RANCHER_SECRET_KEY
+    label: Rancher Secret Key to use
     type: string
     required: true
 
