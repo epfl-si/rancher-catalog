@@ -3,7 +3,7 @@
 version: '2'
 catalog:
   name: "amm API"
-  version: "0.1.0"
+  version: "0.2.0"
   uuid: 1
   description: |
     REST API for amm 
