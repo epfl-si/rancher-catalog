@@ -1,0 +1,40 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+
+services:
+
+  amm:
+    image: epflidevelop/amm
+    environment:
+      ACCRED_PASSWORD: ${ACCRED_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      LDAP_USER_BASE_DN: ${LDAP_USER_BASE_DN}
+      LDAP_USER_SEARCH_ATTR: ${LDAP_USER_SEARCH_ATTR}
+      LDAP_SERVER: ${LDAP_SERVER}
+      LDAP_SERVER_FOR_SEARCH: ${LDAP_SERVER_FOR_SEARCH}
+      LDAP_USE_SSL: ${LDAP_USE_SSL}
+      AMM_ENVIRONMENT: ${AMM_ENVIRONMENT}
+      CACHE_REDIS_LOCATION: ${CACHE_REDIS_LOCATION}
+      CACHE_REDIS_CLIENT_CLASS: ${CACHE_REDIS_CLIENT_CLASS}
+      DJANGO_SETTINGS_MODULE: config.settings.base
+      DJANGO_HOST: ${SERVICE_FQDN}
+      DJANGO_WORKER_COUNT: ${DJANGO_WORKER_COUNT}
+      RANCHER_API_URL: ${RANCHER_API_URL}
+      RANCHER_VERIFY_CERTIFICATE:  ${RANCHER_VERIFY_CERTIFICATE}
+      RANCHER_ACCESS_KEY: ${RANCHER_ACCESS_KEY}
+      RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
+    labels:
+      io.rancher.container.pull_image: always
+    expose:
+      - 8000
+    external_links:
+      - ${REDIS_SERVICE}
+
+  lb:
+    image: rancher/lb-service-haproxy:v0.4.9
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+    ports:
+      - 443
