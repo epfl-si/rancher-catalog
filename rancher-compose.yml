@@ -63,6 +63,26 @@ catalog:
     description: the FQDN that will be used to access the API
     required: true
 
+  - variable: DJANGO_WORKER_COUNT
+    label: Number of workers for Django Framework
+    type: string
+    required: true
+
+  - variable: LDAP_SERVER_FOR_SEARCH
+    label: LDAP Server used for Searching
+    type: string
+    required: true
+
+  - variable: LDAP_USE_SSL
+    label: Use SSL for ldap connections
+    type: boolean
+    required: true
+
+  - variable: AMM_ENVIRONMENT
+    label: Rancher environment to use in the Rancher API
+    type: string
+    required: true
+
 services:
   lb:
     lb_config:
