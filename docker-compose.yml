@@ -19,6 +19,8 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.base
       DJANGO_HOST: ${SERVICE_FQDN}
       DJANGO_WORKER_COUNT: ${DJANGO_WORKER_COUNT}
+    labels:
+      io.rancher.container.pull_image: always
     expose:
       - 8000
     external_links:
