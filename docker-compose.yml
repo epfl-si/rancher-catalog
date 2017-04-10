@@ -3,7 +3,7 @@
 version: '2'
 services:
   ammextras:
-    image: epflidevelop/mysql-amm-extra-features:0.1.10
+    image: epflidevelop/mysql-amm-extra-features:0.1.11
     volumes:
     - /docker-entrypoint-initdb.d
     labels:
