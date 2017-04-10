@@ -27,6 +27,14 @@ services:
     - mysqldata:/var/lib/mysql
     labels:
       io.rancher.sidekicks: ammextras
+    depends_on:
+      - rest
+
+  rest:
+    image: ubuntu:16.04
+    retain_ip: true
+    environment:
+      MYSQL_HOST: mysql
 
 volumes:
   mysqldata: 
