@@ -17,11 +17,6 @@
         - "5.7"
       default: "5.5"
       required: true
-    - variable: MYSQL_ROOT_PASSWORD
-      label: MySQL root password
-      decription: The password that will be set for the MySQL root superuser account
-      type: password
-      required: true
     - variable: MYSQL_DATABASE
       label: MySQL database
       description: The name of a database to be created on image startup

@@ -12,7 +12,6 @@ def tests(stackname) {
 
 def stack_env_55 = [
   'MYSQL_VERSION' : '5.5',
-  'MYSQL_ROOT_PASSWORD': 'test',
   'MYSQL_DATABASE': 'test',
   'AMM_USERNAME': 'test',
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
@@ -23,7 +22,6 @@ def stack_env_55 = [
 
 def stack_env_56 = [
   'MYSQL_VERSION' : '5.6',
-  'MYSQL_ROOT_PASSWORD': 'test',
   'MYSQL_DATABASE': 'test',
   'AMM_USERNAME': 'test',
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
@@ -34,7 +32,6 @@ def stack_env_56 = [
 
 def stack_env_57 = [
   'MYSQL_VERSION' : '5.7',
-  'MYSQL_ROOT_PASSWORD': 'test',
   'MYSQL_DATABASE': 'test',
   'AMM_USERNAME': 'test',
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
