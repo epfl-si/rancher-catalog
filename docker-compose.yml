@@ -12,7 +12,6 @@ services:
   mysql:
     image: mysql:${MYSQL_VERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_HOST: localhost
       AMM_USER_PASSWORD_HASH: ${AMM_USER_PASSWORD_HASH}
