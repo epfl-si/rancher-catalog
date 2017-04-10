@@ -17,6 +17,7 @@ services:
       AMM_USER_PASSWORD_HASH: ${AMM_USER_PASSWORD_HASH}
       AMM_USERNAME: ${AMM_USERNAME}
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      REST_SERVICE_NAME: rest
     ports:
     - ${MYSQL_EXPORT_PORT}:3306
     #mem_limit: ${MEM_LIMIT}
