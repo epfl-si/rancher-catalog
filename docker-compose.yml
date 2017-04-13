@@ -32,11 +32,12 @@ services:
 
   nginx:
     image: library/nginx:1.11
+    links:
+      - amm:django
     volumes_from:
       - amm
     expose:
       - 80
-    net: container:amm
 
   lb:
     image: rancher/lb-service-haproxy:v0.4.9
