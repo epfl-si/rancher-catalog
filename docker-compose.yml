@@ -26,10 +26,17 @@ services:
       RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
     labels:
       io.rancher.container.pull_image: always
-    expose:
-      - 8000
+      io.rancher.sidekicks: nginx
     external_links:
       - ${REDIS_SERVICE}
+
+  nginx:
+    image: library/nginx:1.11
+    volumes_from:
+      - amm
+    expose:
+      - 80
+    net: container:amm
 
   lb:
     image: rancher/lb-service-haproxy:v0.4.9
