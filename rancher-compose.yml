@@ -118,7 +118,7 @@ services:
       port_rules:
       - priority: 1
         protocol: https
-        service: amm
+        service: nginx
         hostname: ${SERVICE_FQDN}
         source_port: 443
         target_port: 80

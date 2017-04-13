@@ -26,12 +26,13 @@ services:
       RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: nginx
     external_links:
       - ${REDIS_SERVICE}
 
   nginx:
     image: library/nginx:1.11
+    labels:
+      io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/amm
     links:
       - amm:django
     volumes_from:
