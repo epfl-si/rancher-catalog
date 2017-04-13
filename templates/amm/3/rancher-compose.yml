@@ -103,6 +103,12 @@ catalog:
     type: string
     required: true
 
+  - variable: DJANGO_SETTINGS_MODULE
+    label: Settings module for django application
+    type: string
+    default: config.settings.prod
+    required: true
+
 services:
   lb:
     lb_config:
