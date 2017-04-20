@@ -34,6 +34,8 @@ services:
   rest:
     image: epflidevelop/mysql-rest
     retain_ip: true
+    labels:
+      io.rancher.container.pull_image: always
     environment:
       MYSQL_HOST: mysql
 
