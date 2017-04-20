@@ -12,7 +12,7 @@ def successhook() {
 }
 
 def rancher_server_url = 'https://test-rancher.epfl.ch'
-def rancher_server_credid = 'amm-test-rancher-creds'
+def rancher_server_credid = 'test-rancher-ci-cred-jenkins'
 def rancher_environment = 'DB'
 def projectname = 'amm'
 def isinfratemplate = false
@@ -23,7 +23,7 @@ def rancher_catalog_repo = 'rancher-catalog'
 
 withCredentials(
     [[$class: 'UsernamePasswordMultiBinding',
-    credentialsId: rancher_server_credid,
+    credentialsId: 'amm-test-rancher-creds',
     usernameVariable: 'ACCESS_KEY',
     passwordVariable: 'SECRET_KEY']]
   ) {
@@ -52,7 +52,7 @@ withCredentials(
   template_pipeline.process(
     projectname,
     isinfratemplate,
-    tests,
+    this.&tests,
     github_organization,
     github_cred_id,
     rancher_catalog_repo,
@@ -61,7 +61,7 @@ withCredentials(
     rancher_server_credid,
     rancher_environment,
     stack_env,
-    successhook
+    this.&successhook
   )
 
 }
