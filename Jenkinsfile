@@ -12,7 +12,7 @@ def successhook() {
 }
 
 def rancher_server_url = 'https://test-rancher.epfl.ch'
-def rancher_server_credid = 'test-rancher-ci-cred-jenkins'
+def rancher_server_credid = 'amm-test-rancher-creds'
 def rancher_environment = 'DB'
 def projectname = 'amm'
 def isinfratemplate = false
