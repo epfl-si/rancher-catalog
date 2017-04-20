@@ -2,9 +2,9 @@
 ---
 .catalog:
   name: MySQL
-  version: v0
+  version: v67
   description: MySQL with resources contraints
-  uuid: mysql-16
+  uuid: mysql-67
   minimum_rancher_version: v1.2.0
   questions:
     - variable: MYSQL_VERSION
