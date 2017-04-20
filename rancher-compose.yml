@@ -109,6 +109,12 @@ catalog:
     default: config.settings.prod
     required: true
 
+  - variable: REST_API_ADDRESS
+    label: Address template for MySQL change password API
+    type: string
+    default: rest.%{stack}.rancher.internal
+    required: true
+
 services:
   lb:
     lb_config:

@@ -24,6 +24,7 @@ services:
       RANCHER_VERIFY_CERTIFICATE:  ${RANCHER_VERIFY_CERTIFICATE}
       RANCHER_ACCESS_KEY: ${RANCHER_ACCESS_KEY}
       RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
+      REST_API_ADDRESS: ${REST_API_ADDRESS}
     labels:
       io.rancher.container.pull_image: always
     external_links:
