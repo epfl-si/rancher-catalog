@@ -27,6 +27,8 @@ services:
       REST_API_ADDRESS: ${REST_API_ADDRESS}
     labels:
       io.rancher.container.pull_image: always
+    volumes:
+      - static_data:/opt/amm/src/static
     external_links:
       - ${REDIS_SERVICE}
 
@@ -36,8 +38,8 @@ services:
       io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/amm
     links:
       - amm:django
-    volumes_from:
-      - amm
+    volumes:
+      - static_data:/usr/share/nginx/html/static
     expose:
       - 80
 
@@ -48,3 +50,6 @@ services:
       io.rancher.container.create_agent: 'true'
     ports:
       - 443
+
+volumes:
+  static_data: {}

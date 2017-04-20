@@ -109,11 +109,16 @@ catalog:
     default: config.settings.prod
     required: true
 
-  - variable: REST_API_ADDRESS
-    label: Address template for MySQL change password API
+  - variable: ACCRED_PASSWORD
+    label: Password for ACCRED access
     type: string
-    default: rest.%{stack}.rancher.internal
     required: true
+
+  - variable: REST_API_ADDRESS
+    label: Address template to use to access MySQL password change API
+    type: string
+    required: true
+    default: rest.%{stack}.rancher.internal
 
 services:
   lb:
@@ -124,10 +129,18 @@ services:
       port_rules:
       - priority: 1
         protocol: https
+        service: amm
+        hostname: ${SERVICE_FQDN}
+        source_port: 443
+        target_port: 8000
+        path: /v1
+      - priority: 1
+        protocol: https
         service: nginx
         hostname: ${SERVICE_FQDN}
         source_port: 443
         target_port: 80
+        path: /static
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
