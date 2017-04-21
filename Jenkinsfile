@@ -45,6 +45,16 @@ def stack_env_57 = [
   'MYSQL_EXPORT_PORT' : 3300
 ]
 
+def stack_env_80 = [
+  'MYSQL_VERSION' : '8.0',
+  'MYSQL_DATABASE': 'test',
+  'AMM_USERNAME': 'test',
+  'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
+  'MAX_CONNECTIONS' : '3',
+  'QUOTA_SIZE_MIB': '500',
+  'MYSQL_EXPORT_PORT' : 3300
+]
+
 //template_pipeline.process(
 //    'mysql',
 //    false,
@@ -78,6 +88,7 @@ node('docker') {
       template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_55, this.&tests)
       template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_56, this.&tests)
       template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_57, this.&tests)
+      template_pipeline.deploy_test_and_cleanup(rancher_server_url, rancher_server_credid, rancher_env_id, projectname, isinfratemplate, stack_env_80, this.&tests)
       template_pipeline.success_post_tests(projectname, jenkins_email, github_cred_id, github_organization, rancher_catalog_repo, isinfratemplate)
     }
     currentBuild.result = "SUCCESS"
