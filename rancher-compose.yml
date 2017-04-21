@@ -55,3 +55,7 @@
       type: int
       default: 3306
       required: true
+
+services:
+  rest:
+    retain_ip: true
