@@ -10,9 +10,9 @@ def tests(stackname) {
   sleep 20
   sh """ getent hosts ${stackname}.db.test-rsaas.epfl.ch  """
   // connect to the mysql instance to create the table
-  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3300 -ptest -u test test" """
+  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3301 -ptest -u test test" """
   // connect to the mysql instance to insert data and get it back
-  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3300 -ptest -u test test" """
+  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3301 -ptest -u test test" """
 }
 
 def stack_env_55 = [
@@ -22,7 +22,7 @@ def stack_env_55 = [
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
   'MAX_CONNECTIONS' : '3',
   'QUOTA_SIZE_MIB': '500',
-  'MYSQL_EXPORT_PORT' : 3300
+  'MYSQL_EXPORT_PORT' : 3301
 ]
 
 def stack_env_100 = [
@@ -32,7 +32,7 @@ def stack_env_100 = [
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
   'MAX_CONNECTIONS' : '3',
   'QUOTA_SIZE_MIB': '500',
-  'MYSQL_EXPORT_PORT' : 3300
+  'MYSQL_EXPORT_PORT' : 3301
 ]
 
 def stack_env_101 = [
@@ -42,7 +42,7 @@ def stack_env_101 = [
   'AMM_USER_PASSWORD_HASH': '*94bdcebe19083ce2a1f959fd02f964c7af4cfc29',
   'MAX_CONNECTIONS' : '3',
   'QUOTA_SIZE_MIB': '500',
-  'MYSQL_EXPORT_PORT' : 3300
+  'MYSQL_EXPORT_PORT' : 3301
 ]
 
 def rancher_server_url = 'https://test-rancher.epfl.ch'
