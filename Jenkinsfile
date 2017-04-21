@@ -10,9 +10,9 @@ def tests(stackname) {
   sleep 20
   sh """ getent hosts ${stackname}.db.test-rsaas.epfl.ch  """
   // connect to the mysql instance to create the table
-  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test" """
+  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3300 -ptest -u test test" """
   // connect to the mysql instance to insert data and get it back
-  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test" """
+  sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -P 3300 -ptest -u test test" """
 }
 
 def stack_env_55 = [
