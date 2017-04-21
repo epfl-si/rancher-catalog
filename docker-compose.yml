@@ -21,7 +21,7 @@ services:
     ports:
     - ${MYSQL_EXPORT_PORT}:3306
     #mem_limit: ${MEM_LIMIT}
-    command: --max-connections=${MAX_CONNECTIONS} --innodb_file_per_table 
+    command: --max-connections=${MAX_CONNECTIONS} --innodb_file_per_table  --innodb_buffer_pool_size=${QUOTA_SIZE_MIB}000000 --tmpdir=/var/lib/mysql/_tmp/ --log-output=TABLE --console
     volumes_from:
     - ammextras
     volumes:
