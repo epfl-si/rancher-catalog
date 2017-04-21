@@ -1,0 +1,47 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+services:
+  ammextras:
+    image: epflidevelop/mysql-amm-extra-features:0.1.29
+    volumes:
+    - /docker-entrypoint-initdb.d
+    labels:
+      io.rancher.container.start_once: true
+
+  mysql:
+    image: mariadb:${MYSQL_VERSION}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_HOST: localhost
+      AMM_USER_PASSWORD_HASH: ${AMM_USER_PASSWORD_HASH}
+      AMM_USERNAME: ${AMM_USERNAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      REST_SERVICE_NAME: rest
+    ports:
+    - ${MYSQL_EXPORT_PORT}:3306
+    #mem_limit: ${MEM_LIMIT}
+    command: --max-connections=${MAX_CONNECTIONS} --innodb_file_per_table --tmpdir=/var/lib/mysql/ --log-output=TABLE --console --innodb_buffer_pool_instances=2
+    volumes_from:
+    - ammextras
+    volumes:
+    - mysqldata:/var/lib/mysql
+    labels:
+      io.rancher.sidekicks: ammextras
+    depends_on:
+      - rest
+
+  rest:
+    image: epflidevelop/mysql-rest
+    retain_ip: true
+    labels:
+      io.rancher.container.pull_image: always
+    environment:
+      MYSQL_HOST: mysql
+
+volumes:
+  mysqldata:
+    driver: rancher-netapp-qtree
+    driver_opts:
+      size: ${QUOTA_SIZE_MIB}M
+
