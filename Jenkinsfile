@@ -6,7 +6,11 @@
 def template_pipeline = new ch.epfl.idevelop.template_pipeline()
 
 def tests(stackname) {
+  // wait for the DNS to be up-to-date
+  sleep 20
+  // connect to the mysql instance to create the table
   sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'CREATE TABLE foo (foo integer);' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test" """
+  // connect to the mysql instance to insert data and get it back
   sh """ docker run --rm --entrypoint bash mysql:5.7 -c "echo 'INSERT INTO foo (foo) VALUES (1), (2), (3), (4); SELECT * FROM foo;' | mysql -h ${stackname}.db.test-rsaas.epfl.ch -ptest -u test test" """
 }
 
