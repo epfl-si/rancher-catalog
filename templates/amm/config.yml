@@ -3,6 +3,6 @@
 name: AMM API
 description: |
   REST API for amm 
-version: v9
+version: v10
 category: AMM
 
