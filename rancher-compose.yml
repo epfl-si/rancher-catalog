@@ -129,18 +129,18 @@ services:
       port_rules:
       - priority: 1
         protocol: https
-        service: amm
-        hostname: ${SERVICE_FQDN}
-        source_port: 443
-        target_port: 8000
-        path: /
-      - priority: 1
-        protocol: https
         service: nginx
         hostname: ${SERVICE_FQDN}
         source_port: 443
         target_port: 80
         path: /static
+      - priority: 1
+        protocol: https
+        service: amm
+        hostname: ${SERVICE_FQDN}
+        source_port: 443
+        target_port: 8000
+        path: /
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
