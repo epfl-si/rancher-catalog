@@ -33,7 +33,7 @@ services:
       - rest
 
   rest:
-    image: epflidevelop/mysql-rest:0.1.7
+    image: epflidevelop/mysql-rest:0.1.8
     retain_ip: true
     labels:
       io.rancher.container.pull_image: always
