@@ -19,15 +19,15 @@ def successhook() {
   }
 }
 
-def rancher_server_url = 'https://test-rancher.epfl.ch'
-def rancher_server_credid = 'test-rancher-ci-cred-jenkins'
-def rancher_environment = 'DB'
-def projectname = 'amm'
-def isinfratemplate = false
-def jenkins_email = 'amm-ci@groupes.epfl.ch'
-def github_cred_id = 'amm-token'
-def github_organization = 'epfl-idevelop'
-def rancher_catalog_repo = 'rancher-catalog'
+rancher_server_url = 'https://test-rancher.epfl.ch'
+rancher_server_credid = 'test-rancher-ci-cred-jenkins'
+rancher_environment = 'DB'
+projectname = 'amm'
+isinfratemplate = false
+jenkins_email = 'amm-ci@groupes.epfl.ch'
+github_cred_id = 'amm-token'
+github_organization = 'epfl-idevelop'
+rancher_catalog_repo = 'rancher-catalog'
 
 withCredentials(
     [[$class: 'UsernamePasswordMultiBinding',
