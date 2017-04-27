@@ -29,8 +29,6 @@ services:
       io.rancher.container.pull_image: always
     volumes:
       - static_data:/opt/amm/src/static
-    external_links:
-      - ${REDIS_SERVICE}
 
   nginx:
     image: library/nginx:1.11

@@ -33,12 +33,6 @@ catalog:
     description: LDAP Server name (or IP) for user authentication
     required: true
 
-  - variable: REDIS_SERVICE
-    label: Redis Service
-    type: service 
-    description: Redis Service for backend storage
-    required: true
-
   - variable: CACHE_REDIS_LOCATION
     label: Django Cache Redis Location
     type: string 

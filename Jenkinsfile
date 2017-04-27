@@ -33,7 +33,6 @@ withCredentials(
     'LDAP_USER_BASE_DN': 'ou=users,o=epfl,c=ch',
     'LDAP_USER_SEARCH_ATTR': 'uid',
     'LDAP_SERVER': 'scoldap.epfl.ch',
-    'REDIS_SERVICE': 'redis-sentinel/sentinel',
     'CACHE_REDIS_LOCATION': 'redis_master/sentinel.redis-sentinel.rancher.internal:6379/1',
     'CACHE_REDIS_CLIENT_CLASS': 'django_redis_sentinel.SentinelClient',
     'AMM_CERTIFICATE': 'test',
