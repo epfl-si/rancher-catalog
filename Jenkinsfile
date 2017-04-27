@@ -9,7 +9,7 @@ def tests(stackname) {
 }
 
 def successhook() {
-  if (env.BRANCH_NAME == 'latest') {
+  if (env.BRANCH_NAME == 'master') {
     def rancher_compose = readFile('./rancher-compose.yml')
     def docker_compose = readFile('./docker-compose.yml')
     def version = pipeline.get_template_version()
