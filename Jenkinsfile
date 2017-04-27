@@ -3,12 +3,20 @@
 // Load shared library
 @Library('epflidevelop') import ch.epfl.idevelop.template_pipeline
 
-def template_pipeline = new ch.epfl.idevelop.template_pipeline()
+pipeline = new ch.epfl.idevelop.template_pipeline()
 
 def tests(stackname) {
 }
 
 def successhook() {
+  if (env.BRANCH_NAME == 'latest') {
+    def rancher_compose = readFile('./rancher-compose.yml')
+    def docker_compose = readFile('./docker-compose.yml')
+    def version = pipeline.get_template_version()
+    def envvars = pipeline.get_stack_environment(rancher_server_url, rancher_server_credid, rancher_environment, 'amm')
+
+    pipeline.upgrade_stack(rancher_server_url, rancher_server_credid, rancher_environment, 'amm', docker_compose, rancher_compose, envvars, "catalog://idevelop:amm:${version}")
+  }
 }
 
 def rancher_server_url = 'https://test-rancher.epfl.ch'
@@ -48,7 +56,7 @@ withCredentials(
     'DJANGO_SETTINGS_MODULE': 'config.settings.prod',
   ]
 
-  template_pipeline.process(
+  pipeline.process(
     projectname,
     isinfratemplate,
     this.&tests,
