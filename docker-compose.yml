@@ -28,11 +28,13 @@ services:
     - mysqldata:/var/lib/mysql
     labels:
       io.rancher.sidekicks: ammextras
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
     depends_on:
       - rest
 
   rest:
     image: epflidevelop/mysql-rest
+    retain_ip: true
     labels:
       io.rancher.container.pull_image: always
     environment:

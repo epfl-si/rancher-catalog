@@ -55,7 +55,6 @@
       default: 3306
       required: true
 
-version: '2'
 services:
   rest:
     retain_ip: true
