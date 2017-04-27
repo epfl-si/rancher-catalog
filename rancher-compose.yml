@@ -3,8 +3,8 @@
 version: '2'
 catalog:
   name: "amm API"
-  version: "0.2.7"
-  uuid: 7
+  version: v13
+  uuid: amm-13
   description: |
     REST API for amm 
   minimum_rancher_version: "v1.1.999"
