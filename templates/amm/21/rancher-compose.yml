@@ -1,0 +1,144 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+catalog:
+  name: "amm API"
+  version: v21
+  uuid: amm-21
+  description: |
+    REST API for amm 
+  minimum_rancher_version: "v1.1.999"
+  questions:
+  - variable: SECRET_KEY
+    label: Django secret key
+    type: password 
+    description: Django secret key for sessions 
+    required: true
+
+  - variable: LDAP_USER_BASE_DN
+    label: LDAP user DN
+    type: string 
+    description: LDAP Base DN for user search
+    required: true
+
+  - variable: LDAP_USER_SEARCH_ATTR
+    label: LDAP User Search Attribute
+    type: string 
+    description: Attribute for user dn creation
+    required: true
+
+  - variable: LDAP_SERVER
+    label: LDAP Server
+    type: string 
+    description: LDAP Server name (or IP) for user authentication
+    required: true
+
+  - variable: CACHE_REDIS_LOCATION
+    label: Django Cache Redis Location
+    type: string 
+    description: Redis connection string for cache driver
+    required: true
+
+  - variable: CACHE_REDIS_CLIENT_CLASS
+    label: Django Redis Cache Client Class
+    type: string 
+    description: Class to use for Django Redis Cache
+    required: true
+
+  - variable: AMM_CERTIFICATE
+    label: SSL Certificate
+    type: certificate 
+    description: Used for the API
+    required: true
+  
+  - variable: SERVICE_FQDN
+    label: Service FQDN
+    type: string
+    description: the FQDN that will be used to access the API
+    required: true
+
+  - variable: DJANGO_WORKER_COUNT
+    label: Number of workers for Django Framework
+    type: string
+    required: true
+
+  - variable: LDAP_SERVER_FOR_SEARCH
+    label: LDAP Server used for Searching
+    type: string
+    required: true
+
+  - variable: LDAP_USE_SSL
+    label: Use SSL for ldap connections
+    type: boolean
+    required: true
+
+  - variable: AMM_ENVIRONMENT
+    label: Rancher environment to use in the Rancher API
+    type: string
+    required: true
+
+  - variable: RANCHER_API_URL
+    label: Rancher API URL to use
+    type: string
+    required: true
+
+  - variable: RANCHER_VERIFY_CERTIFICATE
+    label: Do we check the Rancher Certificate
+    type: boolean
+    required: true
+
+  - variable: RANCHER_ACCESS_KEY
+    label: Rancher Access Key to use
+    type: string
+    required: true
+
+  - variable: RANCHER_SECRET_KEY
+    label: Rancher Secret Key to use
+    type: string
+    required: true
+
+  - variable: DJANGO_SETTINGS_MODULE
+    label: Settings module for django application
+    type: string
+    default: config.settings.prod
+    required: true
+
+  - variable: ACCRED_PASSWORD
+    label: Password for ACCRED access
+    type: string
+    required: true
+
+  - variable: REST_API_ADDRESS
+    label: Address template to use to access MySQL password change API
+    type: string
+    required: true
+    default: rest.%{stack}.rancher.internal
+
+services:
+  lb:
+    lb_config:
+      certs: 
+       - ${AMM_CERTIFICATE}
+      default_cert: ${AMM_CERTIFICATE}
+      port_rules:
+      - priority: 1
+        protocol: https
+        service: nginx
+        hostname: ${SERVICE_FQDN}
+        source_port: 443
+        target_port: 80
+        path: /static
+      - priority: 1
+        protocol: https
+        service: amm
+        hostname: ${SERVICE_FQDN}
+        source_port: 443
+        target_port: 8000
+        path: /
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+
