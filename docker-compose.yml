@@ -26,7 +26,7 @@ services:
       RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
       REST_API_ADDRESS: ${REST_API_ADDRESS}
     labels:
-      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
     volumes:
       - static_data:/opt/amm/src/static
 
@@ -34,6 +34,7 @@ services:
     image: library/nginx:1.11
     labels:
       io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/amm
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
     links:
       - amm:django
     volumes:
@@ -46,6 +47,7 @@ services:
     labels:
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
     ports:
       - 443
 
