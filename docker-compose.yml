@@ -25,6 +25,8 @@ services:
       RANCHER_ACCESS_KEY: ${RANCHER_ACCESS_KEY}
       RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
       REST_API_ADDRESS: ${REST_API_ADDRESS}
+      AMM_MYSQL_DOMAIN: ${AMM_MYSQL_DOMAIN}
+      DJANGO_DEBUG: True
     labels:
       io.rancher.scheduler.affinity:host_label_soft: mysql=true
     volumes:

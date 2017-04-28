@@ -114,6 +114,21 @@ catalog:
     required: true
     default: rest.%{stack}.rancher.internal
 
+  - variable: AMM_MYSQL_DOMAIN
+    label: Suffix to add to stack name to obtain FQDN access to the DB
+    type: string
+    required: true
+    default: .db.rsaas.epfl.ch
+
+  - variable: DJANGO_DEBUG
+    label: Set the debug mode of django
+    type: enum
+    required: true
+    options:
+      - "True"
+      - "False"
+    default: False
+
 services:
   lb:
     lb_config:
