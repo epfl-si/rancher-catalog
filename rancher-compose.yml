@@ -2,9 +2,9 @@
 ---
 .catalog:
   name: MariaDB
-  version: v0
+  version: v7
   description: MariaDB with resources contraints
-  uuid: mariadb-1
+  uuid: mariadb-7
   minimum_rancher_version: v1.2.0
   questions:
     - variable: MYSQL_VERSION
