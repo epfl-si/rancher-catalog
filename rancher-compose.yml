@@ -59,3 +59,18 @@
 services:
   rest:
     retain_ip: true
+    health_check:
+      port: 9000
+      interval: 2000
+      initializing_timeout: 6000
+      unhealthy_threshold: 3
+      strategy: recreate
+      response_timeout: 2000
+  mysql:
+    health_check:
+      port: 3306
+      interval: 2000
+      initializing_timeout: 6000
+      unhealthy_threshold: 3
+      strategy: recreate
+      response_timeout: 2000
