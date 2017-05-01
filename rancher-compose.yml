@@ -72,7 +72,7 @@ catalog:
     type: boolean
     required: true
 
-  - variable: AMM_ENVIRONMENT
+  - variable: RANCHER_ENVIRONMENT_ID
     label: Rancher environment to use in the Rancher API
     type: string
     required: true
