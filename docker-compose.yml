@@ -38,6 +38,7 @@ services:
 
   metrics:
     image: prom/mysqld-exporter:v0.10.0
+    retain_ip: true
     labels:
       io.rancher.scheduler.affinity:host_label_soft: mysql=true
       prometheus_port: 9104
