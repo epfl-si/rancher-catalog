@@ -41,7 +41,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label_soft: mysql=true
     environment:
-      DATA_SOURCE_NAME: "root@mysql:3306/${MYSQL_DATABASE}"
+      DATA_SOURCE_NAME: "root@(mysql:3306)/${MYSQL_DATABASE}"
 
   rest:
     image: epflidevelop/mysql-rest:0.1.10
