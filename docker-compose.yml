@@ -19,8 +19,8 @@ services:
       AMM_USERNAME: ${AMM_USERNAME}
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       REST_SERVICE_NAME: rest
-      EXPORTER_SERVICE_NAME: metrics
-      EXPORTER_USER: metrics
+      METRICS_SERVICE_NAME: metrics
+      METRICS_USER: metrics
     ports:
     - ${MYSQL_EXPORT_PORT}:3306
     #mem_limit: ${MEM_LIMIT}
