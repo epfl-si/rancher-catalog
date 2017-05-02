@@ -40,6 +40,7 @@ services:
     image: prom/mysqld-exporter:v0.10.0
     labels:
       io.rancher.scheduler.affinity:host_label_soft: mysql=true
+      prometheus_port: 9104
     environment:
       DATA_SOURCE_NAME: "root@(mysql:3306)/${MYSQL_DATABASE}"
 
