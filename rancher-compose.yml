@@ -74,3 +74,5 @@ services:
       unhealthy_threshold: 3
       strategy: recreate
       response_timeout: 2000
+  exporter:
+    retain_ip: true
