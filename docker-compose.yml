@@ -19,6 +19,8 @@ services:
       AMM_USERNAME: ${AMM_USERNAME}
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       REST_SERVICE_NAME: rest
+      EXPORTER_SERVICE_NAME: metrics
+      EXPORTER_USER: metrics
     ports:
     - ${MYSQL_EXPORT_PORT}:3306
     #mem_limit: ${MEM_LIMIT}
@@ -32,6 +34,14 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: mysql=true
     depends_on:
       - rest
+      - metrics
+
+  metrics:
+    image: prom/mysqld-exporter:v0.10.0
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
+    environment:
+      DATA_SOURCE_NAME: 'root@mysql:3306'
 
   rest:
     image: epflidevelop/mysql-rest:0.1.10
