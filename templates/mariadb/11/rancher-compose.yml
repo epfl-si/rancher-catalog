@@ -1,0 +1,77 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+.catalog:
+  name: MariaDB
+  version: v11
+  description: MariaDB with resources contraints
+  uuid: mariadb-11
+  minimum_rancher_version: v1.2.0
+  questions:
+    - variable: MYSQL_VERSION
+      label: MySQL version
+      description: The MySQL version to use
+      type: enum
+      options:
+        - "5.5"
+        - "10.0"
+        - "10.1"
+      default: "5.5"
+      required: true
+    - variable: MYSQL_DATABASE
+      label: MySQL database
+      description: The name of a database to be created on image startup
+      type: string
+      required: true
+    - variable: AMM_USERNAME
+      label: MySQL user
+      description: The name of a new user to create
+      type: string
+      required: true
+    - variable: AMM_USER_PASSWORD_HASH
+      label: MySQL password
+      description: "The hashed password of the new user created: format is '*' + [HEX]SHA1([BIN]SHA1('string password'))"
+      type: string
+      required: true
+#    - variable: MEM_LIMIT
+#      label: Memory limit
+#      description: Memory limit.
+#      type: int
+#      required: true
+    - variable: MAX_CONNECTIONS
+      label: Max connections
+      description: Maximum number of concurrent connections.
+      type: int
+      default: 151
+      required: true
+    - variable: QUOTA_SIZE_MIB
+      label: Quota for maximum file size
+      type: int
+      default: 500
+      required: true
+    - variable: MYSQL_EXPORT_PORT
+      label: Publicly Accessible Port
+      description: Port Published that will be used by the end-user to access this MySQL instance
+      type: int
+      default: 3306
+      required: true
+
+services:
+  rest:
+    retain_ip: true
+    health_check:
+      port: 9000
+      interval: 2000
+      initializing_timeout: 6000
+      unhealthy_threshold: 3
+      strategy: recreate
+      response_timeout: 2000
+  mysql:
+    health_check:
+      port: 3306
+      interval: 2000
+      initializing_timeout: 6000
+      unhealthy_threshold: 3
+      strategy: recreate
+      response_timeout: 2000
+  metrics:
+    retain_ip: true
