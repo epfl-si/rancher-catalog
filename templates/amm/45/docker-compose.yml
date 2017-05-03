@@ -1,0 +1,57 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+version: '2'
+
+services:
+
+  amm:
+    image: epflidevelop/amm:0.1.42
+    environment:
+      ACCRED_PASSWORD: ${ACCRED_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      LDAP_USER_BASE_DN: ${LDAP_USER_BASE_DN}
+      LDAP_USER_SEARCH_ATTR: ${LDAP_USER_SEARCH_ATTR}
+      LDAP_SERVER: ${LDAP_SERVER}
+      LDAP_SERVER_FOR_SEARCH: ${LDAP_SERVER_FOR_SEARCH}
+      LDAP_USE_SSL: ${LDAP_USE_SSL}
+      RANCHER_ENVIRONMENT_ID: ${RANCHER_ENVIRONMENT_ID}
+      CACHE_REDIS_LOCATION: ${CACHE_REDIS_LOCATION}
+      CACHE_REDIS_CLIENT_CLASS: ${CACHE_REDIS_CLIENT_CLASS}
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
+      DJANGO_HOST: ${SERVICE_FQDN}
+      DJANGO_WORKER_COUNT: ${DJANGO_WORKER_COUNT}
+      RANCHER_API_URL: ${RANCHER_API_URL}
+      RANCHER_VERIFY_CERTIFICATE:  ${RANCHER_VERIFY_CERTIFICATE}
+      RANCHER_ACCESS_KEY: ${RANCHER_ACCESS_KEY}
+      RANCHER_SECRET_KEY: ${RANCHER_SECRET_KEY}
+      REST_API_ADDRESS: ${REST_API_ADDRESS}
+      AMM_MYSQL_DOMAIN: ${AMM_MYSQL_DOMAIN}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
+    volumes:
+      - static_data:/opt/amm/src/static
+
+  nginx:
+    image: library/nginx:1.11
+    labels:
+      io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/amm
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
+    links:
+      - amm:django
+    volumes:
+      - static_data:/usr/share/nginx/html/static
+    expose:
+      - 80
+
+  lb:
+    image: rancher/lb-service-haproxy:v0.4.9
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.affinity:host_label_soft: mysql=true
+    ports:
+      - 443
+
+volumes:
+  static_data: {}
