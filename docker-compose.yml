@@ -5,7 +5,7 @@ version: '2'
 services:
 
   amm:
-    image: epflidevelop/amm:0.1.40
+    image: epflidevelop/amm:0.1.41
     environment:
       ACCRED_PASSWORD: ${ACCRED_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
